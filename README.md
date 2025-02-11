@@ -58,6 +58,8 @@ LAYER      ROW    COLUMN              SP_2          SP_3          SP_4         T
 
 ### Assumptions & Limitations
 * The CBB file must be in compact budget format.
+* Single-precision is assumed in the CBB file.
 * The output file structure assumes MODFLOW structured grids (NROW, NCOL, NLAY).
+* No auxiliary variables are handled.
 * Only one budget term is extracted per run. To extract multiple terms, run the program separately for each term.
 * Stress periods are assumed to be sequential in the CBB file.
