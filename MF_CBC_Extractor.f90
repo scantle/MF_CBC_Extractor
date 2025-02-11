@@ -21,6 +21,7 @@ program MF_CBC_Extractor
   real, allocatable    :: read_in(:,:,:)       ! ncol, nrow, nlay
   real, allocatable    :: aux(:)
   real*8, allocatable  :: accumulator(:,:,:,:) ! nsp, ncol, nrow, nlay
+  real*8, allocatable  :: sum_per_sp(:)  ! Store sum per stress period
   character(len=16)    :: temp, text_label, target_label
   character(len=16),allocatable    :: auxtxt(:)
   character(len=256)   :: cbbfile, outfile
@@ -41,9 +42,13 @@ program MF_CBC_Extractor
   call get_command_argument(4, target_label)
   target_label = trim(adjustl(target_label))
   
-  ! Setup
+  ! Open up console line overwrite
   open(6, carriagecontrol='fortran')
-  nsp                  = end_sp - start_sp
+  ! Calculate number of stress periods, sum array
+  nsp = end_sp - start_sp
+  allocate(sum_per_sp(nsp))
+  sum_per_sp(:) = 0.0d0
+  ! Generate outfile name
   write(outfile,'(3a)') 'MF_CBC_', trim(target_label), '.out'
   
   ! Reading CBB file
@@ -142,7 +147,17 @@ program MF_CBC_Extractor
     end do
   end do
   
+  ! Compute sum per stress period
+  do i = 1, nsp
+    sum_per_sp(i) = sum(accumulator(i,:,:,:))
+  end do
+
+  ! Write the SUM line
+  write(11, '(3a16, *(es16.6))') 'SUM', ' ', ' ', sum_per_sp, sum(sum_per_sp)
+  
   close(11)
+  deallocate(sum_per_sp, read_in, accumulator)
+  
   
 !-----------------------------------------------------------------------------------------------!  
   ! End of main program
