@@ -57,7 +57,7 @@ program MF_CBC_Extractor
   open(10, file=trim(cbbfile), form='binary', status='old', iostat=ierr)
   do
     read(10, iostat=ierr) kstp, kper, text_label, ncol, nrow, nlay, method, delt, pertim, totim
-    !write(*,*) kstp, kper, text_label, ncol, nrow, nlay, method, delt, pertim, totim
+    !write(*,*) kstp, kper, text_label, ncol, nrow, nlay, method, delt, pertim, totim  ! debug
 
     ! Check if the file is still going
     if(ierr /= 0) then
@@ -99,7 +99,7 @@ program MF_CBC_Extractor
         read(10) read_in(:,:,1)
       case(5)  ! UBUSV4
         read(10) naux
-        naux = naux -1
+        naux = max(naux -1, 0)
         if (allocated(auxtxt)) deallocate(auxtxt)
         if (allocated(aux)) deallocate(aux)
         allocate(auxtxt(naux))
@@ -156,7 +156,12 @@ program MF_CBC_Extractor
   write(11, '(3a16, *(es16.6))') 'SUM', ' ', ' ', sum_per_sp, sum(sum_per_sp)
   
   close(11)
-  deallocate(sum_per_sp, read_in, accumulator)
+  if (allocated(sum_per_sp))  deallocate(sum_per_sp)
+  if (allocated(read_in))     deallocate(read_in)
+  if (allocated(accumulator)) deallocate(accumulator)
+  if (allocated(ilayer))      deallocate(ilayer)
+  if (allocated(auxtxt))      deallocate(auxtxt)
+  if (allocated(aux))         deallocate(aux)
   
   
 !-----------------------------------------------------------------------------------------------!  
