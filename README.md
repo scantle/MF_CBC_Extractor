@@ -1,6 +1,6 @@
 # MODFLOW Cell-by-Cell Budget Extractor
 ## Overview
-This program reads a MODFLOW binary Cell-by-Cell (CBB) budget file and extracts accumulated flow values for a specified budget term (e.g., "STORAGE") over a range of stress periods. The output is written to a structured text file for further analysis.
+This program reads a MODFLOW binary Cell-by-Cell (CBB) compact budget file and extracts accumulated flow values for a specified budget term (e.g., "STORAGE") over a range of stress periods. The output is written to a structured text file for further analysis.
 
 ## Features
 * Reads and processes MODFLOW CBB files in compact budget format.
@@ -11,16 +11,22 @@ This program reads a MODFLOW binary Cell-by-Cell (CBB) budget file and extracts 
 ---
 
 ## Usage
+### Included Windows Executables
+Two version of the executable are included in the [Bin](./Bin/) folder:
+* `MF_CBC_Extractor.exe`
+* `MF_CBC_Extractor_dbl.exe`
+The second executable is compiled with all real variables in double precision. If your version of MODFLOW was also compiled in double precision, then you should use this executable. If you're not sure what precision your MODFLOW version was compiled with, then try the single-precision version first (MF_CBC_Extractor.exe). If it crashes or reports wacky numbers on screen, then your MODFLOW version was likely compiled with double precision.
+
 ### Command-line Arguments
 The program requires the following arguments:
 
 ```bash
-MF_CBC_Extractor <CBB Filename> <Start SP> <End SP> <Target Label>
+MF_CBC_Extractor [CBB Filename] [Start SP] [End SP] [Target Label]
 ```
-* <CBB Filename>: The name of the MODFLOW CBB file.
-* <Start SP>: The first stress period to accumulate from.
-* <End SP>: The last stress period to accumulate (not inclusive).
-* <Target Label>: The budget term to extract (e.g., "STORAGE").
+* `[CBB Filename]` The name of the MODFLOW CBB file.
+* `[Start SP]` The first stress period to accumulate from.
+* `[End SP]` The last stress period to accumulate (not inclusive).
+* `[Target Label]` The budget term to extract (e.g., "STORAGE").
 ### Example Usage
 Extracting STORAGE changes from stress period 2 to 10:
 ```bash
@@ -50,13 +56,13 @@ LAYER      ROW    COLUMN              SP_2          SP_3          SP_4         T
 ```
 * The **SUM** row at the bottom represents the total storage change summed across all cells for each stress period.
 
----
 ### MODFLOW Budget Interpretation
 * A positive value means the cell gained (e.g., for STORAGE: water stored).
 * A negative value means the cell lost (e.g., for STORAGE: water removed).
+
 ---
 
-### Assumptions & Limitations
+## Assumptions & Limitations
 * The CBB file must be in compact budget format.
 * Single-precision is assumed in the CBB file.
 * The output file structure assumes MODFLOW structured grids (NROW, NCOL, NLAY).
