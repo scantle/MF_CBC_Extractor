@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "MF_CBC_Extractor", "MF_CBC_Extractor.vfproj", "{5073B88D-CD99-4A74-8B45-F9158A27BACE}"
 EndProject
@@ -9,6 +9,8 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		DoublePrecision|x64 = DoublePrecision|x64
+		DoublePrecision|x86 = DoublePrecision|x86
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
@@ -17,6 +19,10 @@ Global
 		{5073B88D-CD99-4A74-8B45-F9158A27BACE}.Debug|x64.Build.0 = Debug|x64
 		{5073B88D-CD99-4A74-8B45-F9158A27BACE}.Debug|x86.ActiveCfg = Debug|Win32
 		{5073B88D-CD99-4A74-8B45-F9158A27BACE}.Debug|x86.Build.0 = Debug|Win32
+		{5073B88D-CD99-4A74-8B45-F9158A27BACE}.DoublePrecision|x64.ActiveCfg = DoublePrecision|x64
+		{5073B88D-CD99-4A74-8B45-F9158A27BACE}.DoublePrecision|x64.Build.0 = DoublePrecision|x64
+		{5073B88D-CD99-4A74-8B45-F9158A27BACE}.DoublePrecision|x86.ActiveCfg = DoublePrecision|Win32
+		{5073B88D-CD99-4A74-8B45-F9158A27BACE}.DoublePrecision|x86.Build.0 = DoublePrecision|Win32
 		{5073B88D-CD99-4A74-8B45-F9158A27BACE}.Release|x64.ActiveCfg = Release|x64
 		{5073B88D-CD99-4A74-8B45-F9158A27BACE}.Release|x64.Build.0 = Release|x64
 		{5073B88D-CD99-4A74-8B45-F9158A27BACE}.Release|x86.ActiveCfg = Release|Win32
