@@ -136,13 +136,13 @@ program MF_CBC_Extractor
   open(11, file=outfile, status='replace')
   
   ! Write header
-  write(11, '(3a16, *(a16))') 'ROW', 'COLUMN', 'LAYER', (to_char(start_sp + i - 1), i = 1, nsp), 'TOTAL'
+  write(11, '(3a16, *(a16))') 'LAYER', 'ROW', 'COLUMN', (to_char(start_sp + i - 1), i = 1, nsp), 'TOTAL'
 
   ! Loop through all cells and write data
-  do col = 1, ncol
+  do lay = 1, abs(nlay)
     do row = 1, nrow
-      do lay = 1, abs(nlay)
-          write(11, '(3i16, *(es16.6))') row, col, lay, (accumulator(i, col, row, lay), i = 1, nsp), sum(accumulator(:, col, row, lay))
+      do col = 1, ncol
+          write(11, '(3i16, *(es16.6))') lay, row, col, (accumulator(i, col, row, lay), i = 1, nsp), sum(accumulator(:, col, row, lay))
       end do
     end do
   end do
